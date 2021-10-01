@@ -1,8 +1,8 @@
 class PrototypesController < ApplicationController
 
-  before_action :set_prototype, only: [:show, :edit]
+  before_action :set_prototype, only: [:show,:edit]
   before_action :authenticate_user!, only: [:create, :edit, :destroy]
-  before_action :move_to_index, except: [:index, :show, :new, :create]
+  before_action :move_to_index, except: [:index, :new, :create, :update, :destroy, :show]
 
   def index
     @prototype = Prototype.all
@@ -55,14 +55,14 @@ class PrototypesController < ApplicationController
     params.require(:prototype).permit(:title, :catch_copy, :concept,:image).merge(user_id: current_user.id)
   end
 
- def set_prototype
+  def set_prototype
   @prototype = Prototype.find(params[:id])
- end
+  end
 
- def move_to_index
-    unless  @prototype.user.id == current_user.id  #投稿者idとログインユーザーのidが一致しなければ
-      redirect_to action: :index
-    end
- end
+  def move_to_index
+     unless  @prototype.user.id == current_user.id  #投稿者idとログインユーザーのidが一致しなければ
+       redirect_to action: :index
+     end
+  end
 
 end
