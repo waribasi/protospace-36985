@@ -2,7 +2,7 @@ class PrototypesController < ApplicationController
 
   before_action :set_prototype, only: [:show, :edit]
   before_action :authenticate_user!, only: [:create, :edit, :destroy]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_index, except: [:index, :show, :new, :create]
 
   def index
     @prototype = Prototype.all
@@ -60,10 +60,9 @@ class PrototypesController < ApplicationController
  end
 
  def move_to_index
-    unless @prototype.id == current_user.id  #投稿者idとログインユーザーのidが一致しなければ
+    unless  @prototype.user.id == current_user.id  #投稿者idとログインユーザーのidが一致しなければ
       redirect_to action: :index
     end
  end
-
 
 end
