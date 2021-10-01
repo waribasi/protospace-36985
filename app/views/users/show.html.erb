@@ -2,7 +2,7 @@
   <div class="inner">
     <div class="user__wrapper">
       <h2 class="page-heading">
-        <%= "#{@user.name}"%>  <%#{@prototype.user.name}%>
+        <%= "#{@user.name}"%>
       </h2>
       <table class="table">
         <tbody>
@@ -23,13 +23,17 @@
             <td class="table__col2"><%= "#{@user.position}" %></td>
           </tr>
         </tbody>
+
       </table>
       <h2 class="page-heading">
-        <%= "ユーザー名さんのプロトタイプ"%>
+        <%= "#{@user.name}さんのプロトタイプ"%>
       </h2>
+
       <div class="user__card">
         <%# 部分テンプレートでそのユーザーが投稿したプロトタイプ投稿一覧を表示する %>
+      <%= render partial: "prototypes/prototype", collection: @user.prototypes %>
       </div>
+
     </div>
   </div>
 </div>
